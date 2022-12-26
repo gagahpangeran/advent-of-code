@@ -14,6 +14,7 @@ int main()
   string s;
 
   map<vvi, int> side_cnt;
+  set<vi> points;
 
   while (getline(cin, s))
   {
@@ -27,6 +28,8 @@ int main()
       if (ss.peek() == ',')
         ss.ignore();
     }
+
+    points.insert(corners[0]);
 
     for (int i = 1; i < csz; i++)
     {
@@ -61,6 +64,65 @@ int main()
   }
 
   cout << res << nl;
+
+  vector<int> minp(3, INT_MAX), maxp(3, INT_MIN);
+
+  for (auto pt : points)
+  {
+    assert(pt.size() == 3);
+    for (int i = 0; i < 3; i++)
+    {
+      minp[i] = min(minp[i], pt[i] - 1);
+      maxp[i] = max(maxp[i], pt[i] + 1);
+    }
+  }
+
+  int res2 = 0;
+
+  set<vi> vis;
+  deque<vi> q;
+  q.push_back({minp[0], minp[1], minp[2]});
+
+  while (!q.empty())
+  {
+    vi cur = q.front();
+    q.pop_front();
+    vis.insert(cur);
+
+    vector<vi> neig = {
+        {1, 0, 0},
+        {0, 1, 0},
+        {0, 0, 1},
+        {-1, 0, 0},
+        {0, -1, 0},
+        {0, 0, -1},
+    };
+
+    for (auto ng : neig)
+    {
+      vi next(3);
+      bool in_bound = true;
+      for (int i = 0; i < 3; i++)
+      {
+        next[i] = cur[i] + ng[i];
+        in_bound = in_bound && minp[i] <= next[i] && next[i] <= maxp[i];
+      }
+
+      bool is_visited = vis.find(next) != vis.end();
+      bool in_queue = find(q.begin(), q.end(), next) != q.end();
+      bool valid_point = points.find(next) != points.end();
+
+      if (in_bound && !is_visited && !in_queue)
+      {
+        if (valid_point)
+          res2++;
+        else
+          q.push_back(next);
+      }
+    }
+  }
+
+  cout << res2 << nl;
 
   return 0;
 }
