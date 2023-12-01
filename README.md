@@ -67,6 +67,59 @@ python sol.py < sample.in
 python sol.py < input.in
 ```
 
+### Script
+
+Currently there is one script to generate solution template. You should run the
+script from root directory of this repo.
+
+```bash
+./scripts/generate.sh <day> <year>
+```
+
+The `day` and `year` arguments are optional. If you do not provide it, it will
+automatically using current day and year based on your local time. The script
+will be failed if the directory is already exists.
+
+*All the example assume your local time is **2023-12-07**.*
+
+**Example**
+
+```bash
+./scripts/generate.sh
+```
+
+The output of the script will be something like below.
+
+```bash
+/home/user/gpr/advent-of-code/2023/07/ is created!
+```
+
+The output when the directory is exists.
+
+```bash
+/home/user/gpr/advent-of-code/2023/07/ already exist!
+```
+
+**Example with day argument**
+
+```bash
+./scripts/generate.sh 13
+```
+
+```bash
+/home/user/gpr/advent-of-code/2023/13/ is created!
+```
+
+**Example with day and year argument**
+
+```bash
+./scripts/generate.sh 27 2022
+```
+
+```bash
+/home/user/gpr/advent-of-code/2022/27/ is created!
+```
+
 ## Disclaimer
 
 Solution in this repo may not be the best or readable.
