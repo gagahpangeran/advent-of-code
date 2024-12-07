@@ -120,6 +120,13 @@ The output when the directory is exists.
 /home/user/gpr/advent-of-code/2022/27/ is created!
 ```
 
+## Write Up
+
+Some solutions are accompanied by write up.
+
+I am not a good write up writer. So if you find any error or typo, or if you
+confuse with my explanation, please open an issue or create a pull request.
+
 ## Disclaimer
 
 Solution in this repo may not be the best or readable.
